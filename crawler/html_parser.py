@@ -7,9 +7,7 @@ from bs4 import BeautifulSoup
 import re
 import urllib.parse
 
-
 class HtmlParser(object):
-    
     
     def get_new_urls(self, page_url, soup):
         new_urls = set()
@@ -24,7 +22,6 @@ class HtmlParser(object):
                 new_urls.add(new_full_url)
         
         return new_urls
-    
     
     def get_new_data(self, page_url, soup, x):
         res_data = []

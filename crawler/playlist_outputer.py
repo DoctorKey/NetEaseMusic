@@ -30,13 +30,9 @@ class HtmlOutputer(object):
         if self.datas is None:
             return
         for element in range(len(self.datas)):
-#             if self.datas[element][2].find(r'万') != -1:
-#                 end=  self.datas[element][2].find(r'万')
-#                 self.datas[element][2] = int(self.datas[element][2][0:end])*10000
-#             else:
-            self.datas[element][2] = int(self.datas[element][2])
+            self.datas[element][0] = int(self.datas[element][0])
 #         #从大到小排序        
-        self.datas.sort(key=lambda x:x[2],reverse = True)  
+        self.datas.sort(key=lambda x:x[0],reverse = True)  
           
     def output_html(self):
         self.sort_data()
@@ -124,16 +120,19 @@ class HtmlOutputer(object):
                                 data[5], data[6], data[7]])
             
     def output_data(self):
-
+        output = []
         with codecs.open("test1.csv", "w+", "utf_8_sig") as csvfile:
             cfile = csv.writer(csvfile, dialect="excel")
 #            cfile.writerow(['歌单名','歌单ID','播放量','创建人','创建人ID','歌单封面'])
             for data in self.datas:
                 lists = []
-                for element in data[10]:
-                    lists.append(element[0])
+                for element in data[4]:
+                    lists.append(element)
                 #    print(element[0])
                 cfile.writerow(lists)
+                output.append(lists)
+
+        return output
     
     
     

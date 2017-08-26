@@ -6,15 +6,15 @@ Created on 2017.8.12
 '''
 # -*- coding: utf-8 -*-
 
-import html_downloader, listhtml_parser, listhtml_outputer
+from crawler import html_downloader, playlist_parser, playlist_outputer
 
 class PrepareData(object):
     
     def __init__(self, urls):
         self.urls = urls
         self.downloader = html_downloader.HtmlDownloader()
-        self.parser = listhtml_parser.HtmlParser()
-        self.outputer = listhtml_outputer.HtmlOutputer()
+        self.parser = playlist_parser.HtmlParser()
+        self.outputer = playlist_outputer.HtmlOutputer()
 
     def gendata(self):
         print('total numbers:' + str(len(self.urls)))
@@ -26,4 +26,5 @@ class PrepareData(object):
             new_data = self.parser.parse(url, html_cont)
             self.outputer.collect_data(new_data)
 
-        self.outputer.output_data()
+        data = self.outputer.output_data()
+        return data
